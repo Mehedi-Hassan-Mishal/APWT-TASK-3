@@ -24,6 +24,15 @@
                     </x-nav-link>
                 </div>
                 @endif
+
+
+                @if(Auth::user()->hasRole('admin'))
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin_edit')" :active="request()->routeIs('dashboard')">
+                        {{ __('Edit Profile') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
              
             <!-- Settings Dropdown -->

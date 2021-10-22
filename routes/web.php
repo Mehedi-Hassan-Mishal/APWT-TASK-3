@@ -26,4 +26,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/profile',[DashboardController::class,'profile'])->name('profile');
 });
 
+Route::group(['middleware'=>['auth']], function(){
+    Route::get('/admin_edit',[DashboardController::class,'admin_edit'])->name('admin_edit');
+    Route::post('/update',[DashboardController::class,'Update'])->name('update');
+});
+
+
 require __DIR__.'/auth.php';

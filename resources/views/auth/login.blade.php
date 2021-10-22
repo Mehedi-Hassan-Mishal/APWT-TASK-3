@@ -20,6 +20,7 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+             
             </div>
 
             <!-- Password -->
@@ -30,7 +31,10 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
-            </div>
+                                @error('password')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
+                            </div>
 
             <!-- Remember Me -->
             <div class="block mt-4">
