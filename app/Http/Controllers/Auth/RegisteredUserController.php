@@ -35,23 +35,18 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
         
-            'name' => ['required', 'string', 'max:255', 'min:4'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ],
-        [
-         'name.required'=>'Please Input a Name.',
-         'name.string'=>'Please Input string value.',
-         'name.min'=>'Must be Longer than 4 characters.',
-         'name.max'=>'Too much lengthy.',
-         'email.required'=>'Enter a valid email.',
+            'name'=>'required|string|min:4|max:20',
+            'email'=>'required|email|max:200|unique:users',
+            'password'=>'required|string|confirmed|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/',
+            'password_confirmation'=>'required|same:password|string',
         ]);
 
-        $user = User::create([
+        Auth::login($user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ]));
+
 
         $user->attachRole($request->role_id);
         event(new Registered($user));

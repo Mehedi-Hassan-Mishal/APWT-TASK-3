@@ -1,8 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+
+
+
+
+
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <p style="color:red">Bachelor's Housing Management System</p>
+                
             </a>
         </x-slot>
 
@@ -11,6 +28,15 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+       
+
+        @if(Session::get('success'))
+                <div class="alert alert-success">{{Session::get('success')}}</div>
+                @endif
+
+                @if(Session::get('fail'))
+                <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -19,7 +45,7 @@
             <div>
                 <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-input id="email" value="{{$data->email}}" class="block mt-1 w-full" type="email" name="email" :value="old('email')" />
              
             </div>
 
@@ -30,10 +56,8 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="current-password" />
-                                @error('password')
-                    <span class="text-danger">{{$message}}</span>
-                    @enderror
+                                />
+                               
                             </div>
 
             <!-- Remember Me -->
@@ -58,3 +82,5 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+</body>
+</html>

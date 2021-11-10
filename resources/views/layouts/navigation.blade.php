@@ -6,10 +6,10 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                    <p style="color:red">BHMS</p>
                     </a>
-                </div>
-
+                
+                    </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -17,10 +17,37 @@
                     </x-nav-link>
                 </div>
             
-            @if(Auth::user()->hasRole('admin'))
+            
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('profile')" :active="request()->routeIs('dashboard')">
                         {{ __('Profile') }}
+                    </x-nav-link>
+                </div>
+                
+
+
+            
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin_edit')" :active="request()->routeIs('dashboard')">
+                        {{ __('Edit Profile') }}
+                    </x-nav-link>
+                </div>
+
+
+
+                
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('change_password')" :active="request()->routeIs('dashboard')">
+                        {{ __('Change Password') }}
+                    </x-nav-link>
+                </div>
+        
+
+
+                @if(Auth::user()->hasRole('admin'))
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('hire_manager')" :active="request()->routeIs('dashboard')">
+                        {{ __('Hire Manager') }}
                     </x-nav-link>
                 </div>
                 @endif
@@ -28,12 +55,13 @@
 
                 @if(Auth::user()->hasRole('admin'))
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin_edit')" :active="request()->routeIs('dashboard')">
-                        {{ __('Edit Profile') }}
+                    <x-nav-link :href="route('user_list')" :active="request()->routeIs('dashboard')">
+                        {{ __('User List') }}
                     </x-nav-link>
                 </div>
                 @endif
             </div>
+           
              
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
